@@ -1,0 +1,79 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://cdn.jqmobi.com/1.1/jq.mobi.min.js"></script>
+    <script src="jq.spinner.js"></script>
+    <link rel="stylesheet" type="text/css" href="jq.spinner.css">
+    <script>
+        var numbers = {
+            0: '000',
+            1: 1,
+            2: 2,
+            3: 3,
+            4: 4,
+            5: 5,
+            6: 6,
+            7: 7,
+            8: 8,
+            9: 9
+        };
+
+        function addSpinner() {
+            var finish = function (data) {
+                var out = $("#output");
+                var html = "";
+                data.forEach(function (val) {
+                    console.log(val);
+                    html += val.key + "  " + val.value + "<BR>";
+                });
+                out.html(html);
+            }
+            $.spinner({
+                done: finish,
+                slots: [{
+                    item: numbers,
+                    position: "right",
+                    default: 5
+                }, {
+                    separator: "."
+                }, {
+                    item: numbers,
+                    position: "right",
+                    default: 2
+                }]
+            });
+        }
+        $(document)
+            .ready(function () {
+            $(".spin")
+                .spinner({
+                slots: [{
+                    template: "month",
+                    position: "right"
+                }, {
+                    separator: "/"
+                }, {
+                    template: "day",
+                    position: "right"
+                }, {
+                    separator: "/"
+                }, {
+                    template: "year",
+                    position: "left"
+                }]
+            });
+        });
+    </script>
+    
+    <body>	<a href="javascript:;" onclick="addSpinner()">Test Global</a> 
+        <div id="output"></div>
+        <div>output
+            <input type="text" class="spin" value="10/3/2012">
+        </div>
+        <div>output
+            <input id='dt' type="text" value="10/23/2012" class="spin">
+
+             <input id='dt' type="text" value="10/23/2012" class="spin" style='position:absolute;bottom:10px;'>
+        </div>
+    </body>
+
+</html>
